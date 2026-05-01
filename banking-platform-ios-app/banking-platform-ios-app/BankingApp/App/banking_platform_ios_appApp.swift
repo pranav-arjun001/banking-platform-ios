@@ -11,7 +11,7 @@ import SwiftUI
 struct banking_platform_ios_appApp: App {
     var body: some Scene {
         WindowGroup {
-            DashboardView()
+            OnboardingView()
         }
     }
 }
