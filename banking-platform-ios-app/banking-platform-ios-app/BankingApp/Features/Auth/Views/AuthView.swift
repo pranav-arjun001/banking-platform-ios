@@ -21,7 +21,7 @@ struct AuthView: View {
             Spacer()
 
             VStack(spacing: 14) {
-                PrimaryActionButton(title: "Login") {
+                PrimaryButton(title: "Login") {
                 }
 
                 Button {

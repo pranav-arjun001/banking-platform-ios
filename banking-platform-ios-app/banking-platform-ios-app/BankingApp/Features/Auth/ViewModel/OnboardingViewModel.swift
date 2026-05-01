@@ -4,17 +4,17 @@ import Foundation
 final class OnboardingViewModel {
     let pages: [OnboardingPage] = [
         OnboardingPage(
-            imageName: "onboarding_payment_easy",
+            imageName: "onboarding​_payment​_easy",
             title: "Paying for Everything is\nEasy and Convenient",
             subtitle: "Built-in Fingerprint, face recognition\nand more, keeping you completely safe"
         ),
         OnboardingPage(
-            imageName: "onboarding_secure_platform",
+            imageName: "onboarding​_secure​_platform",
             title: "The most Secoure\nPlatform for Customer",
             subtitle: "Built-in Fingerprint, face recognition\nand more, keeping you completely safe"
         ),
         OnboardingPage(
-            imageName: "onboarding_fastest_payment",
+            imageName: "onboarding​_fastest​_payment",
             title: "Fastest Payment in\nthe world",
             subtitle: "Integrate multiple payment methods\nto help you up the process quickly"
         )

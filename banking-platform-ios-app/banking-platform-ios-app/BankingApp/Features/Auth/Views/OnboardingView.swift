@@ -36,8 +36,10 @@ struct OnboardingView: View {
                     }
                     .padding(.horizontal, 24)
 
-                    PrimaryActionButton(title: "Next") {
-                        viewModel.handleNext()
+                    PrimaryButton(title: "Next") {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            viewModel.handleNext()
+                        }
                     }
                 }
                 .padding(.horizontal, 20)
