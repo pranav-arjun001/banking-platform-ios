@@ -2,7 +2,7 @@ import Foundation
 
 @Observable
 final class DashboardViewModel {
-    let userName = "Pranav"
+    let userName: String
     let balanceText = "$12,450.00"
     let quickActions: [DashboardQuickAction] = [
         DashboardQuickAction(title: "Transfer", systemImage: "arrow.left.arrow.right"),
@@ -14,6 +14,10 @@ final class DashboardViewModel {
         DashboardTransaction(title: "Salary", subtitle: "Yesterday", amountText: "+$2,500.00"),
         DashboardTransaction(title: "Groceries", subtitle: "Monday", amountText: "-$64.20")
     ]
+
+    init(userName: String) {
+        self.userName = userName
+    }
 }
 
 struct DashboardQuickAction: Identifiable {
