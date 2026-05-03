@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @State private var viewModel = DashboardViewModel()
+    let userName: String
+    let onSignOut: () -> Void
+
+    @State private var viewModel: DashboardViewModel
+
+    init(userName: String, onSignOut: @escaping () -> Void) {
+        self.userName = userName
+        self.onSignOut = onSignOut
+        _viewModel = State(initialValue: DashboardViewModel(userName: userName))
+    }
 
     var body: some View {
         ScrollView {
@@ -20,9 +29,23 @@ struct DashboardView: View {
             }
             .padding()
         }
+        .safeAreaInset(edge: .top) {
+            HStack {
+                Spacer()
+
+                Button("Sign Out") {
+                    onSignOut()
+                }
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Color.accent)
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+            .background(Color.white)
+        }
     }
 }
 
 #Preview {
-    DashboardView()
+    DashboardView(userName: "Aimal Naseem", onSignOut: {})
 }

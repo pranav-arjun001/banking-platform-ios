@@ -21,17 +21,17 @@ final class OnboardingViewModel {
     ]
 
     var currentPage = 0
-    var showsAuth = false
 
     var currentContent: OnboardingPage {
         pages[currentPage]
     }
 
-    func handleNext() {
+    func handleNext() -> Bool {
         if currentPage < pages.count - 1 {
             currentPage += 1
+            return false
         } else {
-            showsAuth = true
+            return true
         }
     }
 }
