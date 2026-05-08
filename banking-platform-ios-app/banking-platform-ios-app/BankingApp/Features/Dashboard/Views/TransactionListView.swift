@@ -4,12 +4,25 @@ struct TransactionListView: View {
     let transactions: [DashboardTransaction]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Recent Transactions")
-                .font(.headline)
+        VStack(alignment: .leading, spacing: 18) {
+            HStack {
+                Text("Recent Transactions")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(Color.textPrimary)
 
-            ForEach(transactions) { transaction in
-                TransactionRowView(transaction: transaction)
+                Spacer()
+
+                Button("See All") {
+                }
+                .buttonStyle(.plain)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(Color.accent)
+            }
+
+            VStack(spacing: 6) {
+                ForEach(transactions) { transaction in
+                    TransactionRowView(transaction: transaction)
+                }
             }
         }
     }

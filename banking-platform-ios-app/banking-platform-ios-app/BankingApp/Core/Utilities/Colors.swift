@@ -10,10 +10,16 @@ import SwiftUI
 extension Color {
     static let background = Color(hex: "#F4F4F4")
     static let cardDark = Color(hex: "#25253D")
+    static let cardAccent = Color(hex: "#324AA8")
     static let textPrimary = Color(hex: "#1E1E2D")
     static let textSecondary = Color(hex: "#7E848D")
     static let accent = Color(hex: "#0066FF")
     static let border = Color(hex: "#232533")
+    static let surface = Color(hex: "#FFFFFF")
+    static let surfaceMuted = Color(hex: "#F3F3F6")
+    static let iconMuted = Color(hex: "#ECECF1")
+    static let divider = Color(hex: "#E8E8EE")
+    static let success = Color(hex: "#20B15A")
 }
 
 extension Color {

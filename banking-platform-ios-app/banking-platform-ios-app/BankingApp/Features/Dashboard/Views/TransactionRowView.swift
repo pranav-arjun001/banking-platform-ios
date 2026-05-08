@@ -4,20 +4,31 @@ struct TransactionRowView: View {
     let transaction: DashboardTransaction
 
     var body: some View {
-        HStack {
+        HStack(spacing: 14) {
+            Circle()
+                .fill(Color.surfaceMuted)
+                .frame(width: 46, height: 46)
+                .overlay {
+                    Image(systemName: transaction.iconSystemName)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(transaction.iconForegroundColor)
+                }
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(transaction.title)
-                    .font(.headline)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(Color.textPrimary)
                 Text(transaction.subtitle)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Color.textSecondary)
             }
 
             Spacer()
 
             Text(transaction.amountText)
-                .font(.subheadline.bold())
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(transaction.amountColor)
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 10)
     }
 }

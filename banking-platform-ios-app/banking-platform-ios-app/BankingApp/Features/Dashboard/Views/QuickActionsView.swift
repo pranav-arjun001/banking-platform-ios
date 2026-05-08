@@ -4,23 +4,23 @@ struct QuickActionsView: View {
     let actions: [DashboardQuickAction]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Quick Actions")
-                .font(.headline)
+        HStack(spacing: 18) {
+            ForEach(actions) { action in
+                VStack(spacing: 10) {
+                    Circle()
+                        .fill(Color.surfaceMuted)
+                        .frame(width: 62, height: 62)
+                        .overlay {
+                            Image(systemName: action.systemImage)
+                                .font(.system(size: 24, weight: .medium))
+                                .foregroundStyle(Color.textPrimary)
+                        }
 
-            HStack(spacing: 12) {
-                ForEach(actions) { action in
-                    VStack(spacing: 8) {
-                        Image(systemName: action.systemImage)
-                            .font(.title3)
-                        Text(action.title)
-                            .font(.caption)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.gray.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    Text(action.title)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Color.textPrimary)
                 }
+                .frame(maxWidth: .infinity)
             }
         }
     }
