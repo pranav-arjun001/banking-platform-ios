@@ -33,7 +33,7 @@ struct banking_platform_ios_appApp: App {
                         .navigationBarBackButtonHidden(true)
                     case .dashboard:
                         DashboardView(
-                            userName: viewModel.currentUser?.fullName ?? "Customer",
+                            userName: viewModel.currentUser?.fullName ?? AppConstants.General.defaultCustomerName,
                             onSignOut: {
                                 viewModel.signOut()
                             }

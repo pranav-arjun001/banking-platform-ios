@@ -7,12 +7,12 @@ struct PrimaryButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: 20, weight: .semibold))
+                .font(.system(size: AppDimensions.PrimaryButton.titleFontSize, weight: .semibold))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
-                .frame(height: 56)
+                .frame(height: AppDimensions.PrimaryButton.height)
                 .background(Color.accent)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: AppDimensions.PrimaryButton.cornerRadius))
         }
         .buttonStyle(.plain)
     }

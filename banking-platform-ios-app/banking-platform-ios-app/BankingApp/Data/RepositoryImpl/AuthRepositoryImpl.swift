@@ -2,8 +2,8 @@ import Foundation
 
 struct AuthRepositoryImpl: AuthRepository {
     private enum StorageKey {
-        static let registeredUser = "auth.registeredUser"
-        static let sessionUser = "auth.sessionUser"
+        static let registeredUser = AppConstants.Storage.registeredUserKey
+        static let sessionUser = AppConstants.Storage.sessionUserKey
     }
 
     private struct StoredUser: Codable {
@@ -25,11 +25,11 @@ struct AuthRepositoryImpl: AuthRepository {
         var errorDescription: String? {
             switch self {
             case .accountNotFound:
-                return "No account found for this email. Create a new account first."
+                return AppConstants.Auth.accountNotFoundError
             case .invalidCredentials:
-                return "The email or password entered is incorrect."
+                return AppConstants.Auth.invalidCredentialsError
             case .accountAlreadyExists:
-                return "An account with this email already exists."
+                return AppConstants.Auth.accountAlreadyExistsError
             }
         }
     }
@@ -37,7 +37,7 @@ struct AuthRepositoryImpl: AuthRepository {
     let localStore: LocalStore
 
     func signIn(email: String, password: String) async throws -> AuthenticatedUser {
-        try await Task.sleep(for: .milliseconds(250))
+        try await Task.sleep(for: .milliseconds(AppConstants.Networking.authDelayMilliseconds))
 
         guard let storedUser = loadRegisteredUser() else {
             throw AuthError.accountNotFound
@@ -56,7 +56,7 @@ struct AuthRepositoryImpl: AuthRepository {
     }
 
     func signUp(fullName: String, phoneNumber: String, email: String, password: String) async throws -> AuthenticatedUser {
-        try await Task.sleep(for: .milliseconds(250))
+        try await Task.sleep(for: .milliseconds(AppConstants.Networking.authDelayMilliseconds))
 
         if let storedUser = loadRegisteredUser(),
            storedUser.email.caseInsensitiveCompare(email) == .orderedSame {

@@ -5,15 +5,18 @@ struct OnboardingPageView: View {
 
     var body: some View {
         VStack {
-            Spacer(minLength: 36)
+            Spacer(minLength: AppDimensions.OnboardingPageView.topSpacerMinLength)
 
             Image(page.imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 300, maxHeight: 300)
+                .frame(
+                    maxWidth: AppDimensions.OnboardingPageView.imageMaxWidth,
+                    maxHeight: AppDimensions.OnboardingPageView.imageMaxHeight
+                )
                 .accessibilityHidden(true)
 
-            Spacer(minLength: 24)
+            Spacer(minLength: AppDimensions.OnboardingPageView.bottomSpacerMinLength)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
