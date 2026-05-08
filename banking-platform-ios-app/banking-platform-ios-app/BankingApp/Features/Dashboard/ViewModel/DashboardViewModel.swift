@@ -4,17 +4,17 @@ import SwiftUI
 @Observable
 final class DashboardViewModel {
     let userName: String
-    let cardholderName = "AR Jonson"
-    let cardNumber = "4562  1122  4595  7852"
-    let expiryDate = "24/2000"
-    let cvv = "6986"
-    let quickActions: [DashboardQuickAction] = [
+    let cardholderName = AppConstants.Dashboard.sampleCardholderName
+    let cardNumber = AppConstants.Dashboard.sampleCardNumber
+    let expiryDate = AppConstants.Dashboard.sampleExpiryDate
+    let cvv = AppConstants.Dashboard.sampleCVV
+    let quickActions = [
         DashboardQuickAction(title: "Sent", systemImage: "arrow.up"),
         DashboardQuickAction(title: "Receive", systemImage: "arrow.down"),
         DashboardQuickAction(title: "Loan", systemImage: "dollarsign"),
         DashboardQuickAction(title: "Topup", systemImage: "arrow.up.to.line")
     ]
-    let transactions: [DashboardTransaction] = [
+    let transactions = [
         DashboardTransaction(
             title: "Apple Store",
             subtitle: "Entertainment",

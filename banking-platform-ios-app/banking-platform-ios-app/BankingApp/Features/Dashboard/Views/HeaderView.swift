@@ -4,7 +4,7 @@ struct HeaderView: View {
     let userName: String
 
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: AppDimensions.HeaderView.containerSpacing) {
             Circle()
                 .fill(
                     LinearGradient(
@@ -14,18 +14,18 @@ struct HeaderView: View {
                     )
                 )
                 .overlay {
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: 34))
+                    Image(systemName: AppConstants.Dashboard.userAvatarIcon)
+                        .font(.system(size: AppDimensions.HeaderView.avatarFontSize))
                         .foregroundStyle(Color.textSecondary.opacity(0.8))
                 }
-                .frame(width: 56, height: 56)
+                .frame(width: AppDimensions.HeaderView.avatarSize, height: AppDimensions.HeaderView.avatarSize)
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Welcome back,")
-                    .font(.system(size: 16, weight: .medium))
+            VStack(alignment: .leading, spacing: AppDimensions.HeaderView.textSpacing) {
+                Text(AppConstants.Dashboard.welcomeBackTitle)
+                    .font(.system(size: AppDimensions.HeaderView.subtitleFontSize, weight: .medium))
                     .foregroundStyle(Color.textSecondary)
                 Text(userName)
-                    .font(.system(size: 31, weight: .bold))
+                    .font(.system(size: AppDimensions.HeaderView.titleFontSize, weight: .bold))
                     .foregroundStyle(Color.textPrimary)
             }
 

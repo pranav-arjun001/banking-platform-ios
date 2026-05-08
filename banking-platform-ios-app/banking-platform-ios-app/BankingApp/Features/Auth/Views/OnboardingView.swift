@@ -15,27 +15,27 @@ struct OnboardingView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
 
-            VStack(spacing: 28) {
+            VStack(spacing: AppDimensions.OnboardingView.contentSpacing) {
                 OnboardingPageIndicator(
                     currentPage: viewModel.currentPage,
                     pageCount: viewModel.pages.count
                 )
 
-                VStack(spacing: 12) {
+                VStack(spacing: AppDimensions.OnboardingView.textSpacing) {
                     Text(viewModel.currentContent.title)
-                        .font(.system(size: 28, weight: .bold))
+                        .font(.system(size: AppDimensions.OnboardingView.titleFontSize, weight: .bold))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(Color.textPrimary)
 
                     Text(viewModel.currentContent.subtitle)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: AppDimensions.OnboardingView.subtitleFontSize, weight: .medium))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(Color.textSecondary)
-                        .lineSpacing(4)
+                        .lineSpacing(AppDimensions.OnboardingView.subtitleLineSpacing)
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, AppDimensions.OnboardingView.textHorizontalPadding)
 
-                PrimaryButton(title: "Next") {
+                PrimaryButton(title: AppConstants.Onboarding.nextButtonTitle) {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         if viewModel.handleNext() {
                             onFinished()
@@ -43,9 +43,9 @@ struct OnboardingView: View {
                     }
                 }
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 16)
-            .padding(.bottom, 34)
+            .padding(.horizontal, AppDimensions.OnboardingView.horizontalPadding)
+            .padding(.top, AppDimensions.OnboardingView.topPadding)
+            .padding(.bottom, AppDimensions.OnboardingView.bottomPadding)
         }
         .background(Color.white)
     }

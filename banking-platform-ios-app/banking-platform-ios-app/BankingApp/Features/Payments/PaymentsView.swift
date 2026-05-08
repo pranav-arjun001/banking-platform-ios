@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PaymentsView: View {
     var body: some View {
-        Text("Payments")
+        Text(AppConstants.Features.paymentsTitle)
     }
 }
 

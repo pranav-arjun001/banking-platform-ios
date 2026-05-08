@@ -4,31 +4,34 @@ struct TransactionRowView: View {
     let transaction: DashboardTransaction
 
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: AppDimensions.TransactionRowView.containerSpacing) {
             Circle()
                 .fill(Color.surfaceMuted)
-                .frame(width: 46, height: 46)
+                .frame(
+                    width: AppDimensions.TransactionRowView.iconContainerSize,
+                    height: AppDimensions.TransactionRowView.iconContainerSize
+                )
                 .overlay {
                     Image(systemName: transaction.iconSystemName)
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.system(size: AppDimensions.TransactionRowView.iconFontSize, weight: .semibold))
                         .foregroundStyle(transaction.iconForegroundColor)
                 }
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: AppDimensions.TransactionRowView.textSpacing) {
                 Text(transaction.title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(size: AppDimensions.TransactionRowView.titleFontSize, weight: .semibold))
                     .foregroundStyle(Color.textPrimary)
                 Text(transaction.subtitle)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: AppDimensions.TransactionRowView.subtitleFontSize, weight: .medium))
                     .foregroundStyle(Color.textSecondary)
             }
 
             Spacer()
 
             Text(transaction.amountText)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.system(size: AppDimensions.TransactionRowView.amountFontSize, weight: .semibold))
                 .foregroundStyle(transaction.amountColor)
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, AppDimensions.TransactionRowView.verticalPadding)
     }
 }

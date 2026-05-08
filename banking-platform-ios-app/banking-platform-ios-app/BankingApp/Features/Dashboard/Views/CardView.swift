@@ -8,7 +8,7 @@ struct CardView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
+            RoundedRectangle(cornerRadius: AppDimensions.CardView.cornerRadius, style: .continuous)
                 .fill(
                     LinearGradient(
                         colors: [Color.cardAccent, Color.cardDark],
@@ -17,74 +17,74 @@ struct CardView: View {
                     )
                 )
                 .overlay {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(Color.white.opacity(0.08), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: AppDimensions.CardView.cornerRadius, style: .continuous)
+                        .stroke(Color.white.opacity(0.08), lineWidth: AppDimensions.CardView.borderLineWidth)
                 }
 
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: AppDimensions.CardView.contentSpacing) {
                 HStack {
-                    Image(systemName: "simcard")
-                        .font(.system(size: 22))
+                    Image(systemName: AppConstants.Dashboard.cardChipIcon)
+                        .font(.system(size: AppDimensions.CardView.chipFontSize))
                         .foregroundStyle(Color.white.opacity(0.7))
 
                     Spacer()
 
-                    Image(systemName: "wave.3.right")
-                        .font(.system(size: 18, weight: .medium))
+                    Image(systemName: AppConstants.Dashboard.cardContactlessIcon)
+                        .font(.system(size: AppDimensions.CardView.contactlessFontSize, weight: .medium))
                         .foregroundStyle(Color.accent.opacity(0.9))
                 }
 
                 Text(cardNumber)
-                    .font(.system(size: 22, weight: .medium, design: .rounded))
+                    .font(.system(size: AppDimensions.CardView.cardNumberFontSize, weight: .medium, design: .rounded))
                     .foregroundStyle(Color.white)
-                    .tracking(1.1)
+                    .tracking(AppDimensions.CardView.cardNumberTracking)
 
-                VStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: AppDimensions.CardView.detailsSpacing) {
                     Text(cardholderName)
-                        .font(.system(size: 22, weight: .semibold))
+                        .font(.system(size: AppDimensions.CardView.cardholderFontSize, weight: .semibold))
                         .foregroundStyle(Color.white.opacity(0.95))
 
-                    HStack(spacing: 30) {
-                        cardMeta(title: "Expiry Date", value: expiryDate)
-                        cardMeta(title: "CVV", value: cvv)
+                    HStack(spacing: AppDimensions.CardView.metaSpacing) {
+                        cardMeta(title: AppConstants.Dashboard.cardExpiryTitle, value: expiryDate)
+                        cardMeta(title: AppConstants.Dashboard.cardSecurityCodeTitle, value: cvv)
                         Spacer()
                         mastercardMark
                     }
                 }
             }
-            .padding(24)
+            .padding(AppDimensions.CardView.contentPadding)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 220)
+        .frame(height: AppDimensions.CardView.cardHeight)
     }
 
     private func cardMeta(title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: AppDimensions.CardView.metaTextSpacing) {
             Text(title)
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: AppDimensions.CardView.metaTitleFontSize, weight: .medium))
                 .foregroundStyle(Color.white.opacity(0.55))
             Text(value)
-                .font(.system(size: 22, weight: .semibold))
+                .font(.system(size: AppDimensions.CardView.metaValueFontSize, weight: .semibold))
                 .foregroundStyle(Color.white)
         }
     }
 
     private var mastercardMark: some View {
-        VStack(alignment: .trailing, spacing: 6) {
+        VStack(alignment: .trailing, spacing: AppDimensions.CardView.brandSpacing) {
             ZStack {
                 Circle()
                     .fill(Color.red)
-                    .frame(width: 26, height: 26)
-                    .offset(x: -8)
+                    .frame(width: AppDimensions.CardView.brandCircleSize, height: AppDimensions.CardView.brandCircleSize)
+                    .offset(x: -AppDimensions.CardView.brandOffset)
                 Circle()
                     .fill(Color.orange)
-                    .frame(width: 26, height: 26)
-                    .offset(x: 8)
+                    .frame(width: AppDimensions.CardView.brandCircleSize, height: AppDimensions.CardView.brandCircleSize)
+                    .offset(x: AppDimensions.CardView.brandOffset)
             }
-            .frame(width: 50, height: 26)
+            .frame(width: AppDimensions.CardView.brandFrameWidth, height: AppDimensions.CardView.brandFrameHeight)
 
-            Text("Mastercard")
-                .font(.system(size: 12, weight: .semibold))
+            Text(AppConstants.Dashboard.cardBrandTitle)
+                .font(.system(size: AppDimensions.CardView.brandFontSize, weight: .semibold))
                 .foregroundStyle(Color.white.opacity(0.95))
         }
     }

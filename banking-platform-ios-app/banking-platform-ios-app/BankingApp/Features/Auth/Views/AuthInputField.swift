@@ -10,16 +10,16 @@ struct AuthInputField: View {
     var trailingAction: (() -> Void)?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: AppDimensions.AuthInputField.containerSpacing) {
             Text(title)
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: AppDimensions.AuthInputField.titleFontSize, weight: .medium))
                 .foregroundStyle(Color.textSecondary.opacity(0.75))
 
-            HStack(spacing: 12) {
+            HStack(spacing: AppDimensions.AuthInputField.contentSpacing) {
                 Image(systemName: systemImage)
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: AppDimensions.AuthInputField.iconFontSize, weight: .medium))
                     .foregroundStyle(Color.textSecondary.opacity(0.7))
-                    .frame(width: 18)
+                    .frame(width: AppDimensions.AuthInputField.iconWidth)
 
                 Group {
                     if isSecure {
@@ -29,23 +29,23 @@ struct AuthInputField: View {
                             .textInputAutocapitalization(.never)
                     }
                 }
-                .font(.system(size: 18, weight: .medium))
+                .font(.system(size: AppDimensions.AuthInputField.textFontSize, weight: .medium))
                 .foregroundStyle(Color.textPrimary)
 
                 if let trailingSystemImage, let trailingAction {
                     Button(action: trailingAction) {
                         Image(systemName: trailingSystemImage)
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: AppDimensions.AuthInputField.iconFontSize, weight: .medium))
                             .foregroundStyle(Color.textSecondary.opacity(0.7))
                     }
                     .buttonStyle(.plain)
                 }
             }
-            .padding(.bottom, 10)
+            .padding(.bottom, AppDimensions.AuthInputField.bottomPadding)
 
             Rectangle()
                 .fill(Color.black.opacity(0.08))
-                .frame(height: 1)
+                .frame(height: AppDimensions.AuthInputField.dividerHeight)
         }
     }
 }

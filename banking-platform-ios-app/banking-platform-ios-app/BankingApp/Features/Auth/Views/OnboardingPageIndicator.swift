@@ -6,21 +6,27 @@ struct OnboardingPageIndicator: View {
     @Namespace private var indicatorAnimation
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: AppDimensions.OnboardingPageIndicator.spacing) {
             ForEach(0..<pageCount, id: \.self) { index in
                 ZStack {
                     Capsule()
-                        .fill(Color(hex: "#D7DCE4"))
-                        .frame(width: 6, height: 6)
+                        .fill(Color(hex: AppConstants.Onboarding.inactiveIndicatorHex))
+                        .frame(
+                            width: AppDimensions.OnboardingPageIndicator.inactiveIndicatorWidth,
+                            height: AppDimensions.OnboardingPageIndicator.inactiveIndicatorHeight
+                        )
 
                     if index == currentPage {
                         Capsule()
                             .fill(Color.accent)
-                            .frame(width: 18, height: 6)
-                            .matchedGeometryEffect(id: "activeIndicator", in: indicatorAnimation)
+                            .frame(
+                                width: AppDimensions.OnboardingPageIndicator.activeIndicatorWidth,
+                                height: AppDimensions.OnboardingPageIndicator.activeIndicatorHeight
+                            )
+                            .matchedGeometryEffect(id: AppConstants.Onboarding.activeIndicatorID, in: indicatorAnimation)
                     }
                 }
-                .frame(width: 18, height: 6)
+                .frame(width: AppDimensions.OnboardingPageIndicator.itemWidth, height: AppDimensions.OnboardingPageIndicator.itemHeight)
             }
         }
         .animation(.spring(response: 0.32, dampingFraction: 0.82), value: currentPage)

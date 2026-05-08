@@ -8,24 +8,37 @@
 import SwiftUI
 
 struct DashboardView: View {
-    private enum DashboardTab: String, CaseIterable, Identifiable {
-        case home = "Home"
-        case cards = "My Cards"
-        case statistics = "Statistics"
-        case settings = "Settings"
+    private enum DashboardTab: CaseIterable, Identifiable {
+        case home
+        case cards
+        case statistics
+        case settings
 
-        var id: String { rawValue }
+        var id: String { title }
+
+        var title: String {
+            switch self {
+            case .home:
+                return AppConstants.Dashboard.homeTabTitle
+            case .cards:
+                return AppConstants.Dashboard.cardsTabTitle
+            case .statistics:
+                return AppConstants.Dashboard.statisticsTabTitle
+            case .settings:
+                return AppConstants.Dashboard.settingsTabTitle
+            }
+        }
 
         var systemImage: String {
             switch self {
             case .home:
-                return "house"
+                return AppConstants.Dashboard.homeTabIcon
             case .cards:
-                return "creditcard"
+                return AppConstants.Dashboard.cardsTabIcon
             case .statistics:
-                return "chart.pie"
+                return AppConstants.Dashboard.statisticsTabIcon
             case .settings:
-                return "gearshape"
+                return AppConstants.Dashboard.settingsTabIcon
             }
         }
     }
@@ -52,9 +65,9 @@ struct DashboardView: View {
                 case .home:
                     homeContent
                 case .cards:
-                    placeholderView(title: "My Cards", subtitle: "Card management will appear here.")
+                    placeholderView(title: AppConstants.Dashboard.cardsTabTitle, subtitle: AppConstants.Dashboard.cardsPlaceholderSubtitle)
                 case .statistics:
-                    placeholderView(title: "Statistics", subtitle: "Spending analytics will appear here.")
+                    placeholderView(title: AppConstants.Dashboard.statisticsTabTitle, subtitle: AppConstants.Dashboard.statisticsPlaceholderSubtitle)
                 case .settings:
                     settingsContent
                 }
@@ -67,7 +80,7 @@ struct DashboardView: View {
 
     private var homeContent: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 28) {
+            VStack(alignment: .leading, spacing: AppDimensions.DashboardView.contentSpacing) {
                 HeaderView(userName: viewModel.userName)
                 CardView(
                     cardNumber: viewModel.cardNumber,
@@ -78,40 +91,40 @@ struct DashboardView: View {
                 QuickActionsView(actions: viewModel.quickActions)
                 TransactionListView(transactions: viewModel.transactions)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 120)
+            .padding(.horizontal, AppDimensions.DashboardView.horizontalPadding)
+            .padding(.top, AppDimensions.DashboardView.topPadding)
+            .padding(.bottom, AppDimensions.DashboardView.bottomPadding)
         }
     }
 
     private var settingsContent: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: AppDimensions.DashboardView.settingsSpacing) {
             Spacer()
-            Text("Settings")
-                .font(.system(size: 32, weight: .bold))
+            Text(AppConstants.Dashboard.settingsTabTitle)
+                .font(.system(size: AppDimensions.DashboardView.settingsTitleFontSize, weight: .bold))
                 .foregroundStyle(Color.textPrimary)
-            Button("Sign Out") {
+            Button(AppConstants.Dashboard.signOutTitle) {
                 onSignOut()
             }
             .buttonStyle(.borderedProminent)
             .tint(.accent)
             Spacer()
         }
-        .padding(24)
+        .padding(AppDimensions.DashboardView.settingsPadding)
     }
 
     private func placeholderView(title: String, subtitle: String) -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: AppDimensions.DashboardView.placeholderSpacing) {
             Spacer()
             Text(title)
-                .font(.system(size: 32, weight: .bold))
+                .font(.system(size: AppDimensions.DashboardView.placeholderTitleFontSize, weight: .bold))
                 .foregroundStyle(Color.textPrimary)
             Text(subtitle)
-                .font(.system(size: 16, weight: .medium))
+                .font(.system(size: AppDimensions.DashboardView.placeholderSubtitleFontSize, weight: .medium))
                 .foregroundStyle(Color.textSecondary)
             Spacer()
         }
-        .padding(24)
+        .padding(AppDimensions.DashboardView.placeholderPadding)
     }
 
     private var dashboardTabBar: some View {
@@ -120,21 +133,24 @@ struct DashboardView: View {
                 Button {
                     selectedTab = tab
                 } label: {
-                    VStack(spacing: 6) {
+                    VStack(spacing: AppDimensions.DashboardView.tabItemSpacing) {
                         ZStack {
                             if selectedTab == tab {
-                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                RoundedRectangle(cornerRadius: AppDimensions.DashboardView.selectedBackgroundCornerRadius, style: .continuous)
                                     .fill(Color.accent.opacity(0.12))
-                                    .frame(width: 40, height: 30)
+                                    .frame(
+                                        width: AppDimensions.DashboardView.selectedBackgroundWidth,
+                                        height: AppDimensions.DashboardView.selectedBackgroundHeight
+                                    )
                             }
 
                             Image(systemName: tab.systemImage)
-                                .font(.system(size: 20, weight: .medium))
+                                .font(.system(size: AppDimensions.DashboardView.tabIconFontSize, weight: .medium))
                                 .foregroundStyle(selectedTab == tab ? Color.accent : Color.textSecondary)
                         }
 
-                        Text(tab.rawValue)
-                            .font(.system(size: 13, weight: selectedTab == tab ? .semibold : .medium))
+                        Text(tab.title)
+                            .font(.system(size: AppDimensions.DashboardView.tabLabelFontSize, weight: selectedTab == tab ? .semibold : .medium))
                             .foregroundStyle(selectedTab == tab ? Color.accent : Color.textSecondary)
                     }
                     .frame(maxWidth: .infinity)
@@ -142,13 +158,13 @@ struct DashboardView: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 18)
-        .padding(.top, 14)
-        .padding(.bottom, 18)
+        .padding(.horizontal, AppDimensions.DashboardView.tabBarHorizontalPadding)
+        .padding(.top, AppDimensions.DashboardView.tabBarTopPadding)
+        .padding(.bottom, AppDimensions.DashboardView.tabBarBottomPadding)
         .background(Color.surface)
     }
 }
 
 #Preview {
-    DashboardView(userName: "Aimal Naseem", onSignOut: {})
+    DashboardView(userName: AppConstants.Dashboard.sampleUserName, onSignOut: {})
 }

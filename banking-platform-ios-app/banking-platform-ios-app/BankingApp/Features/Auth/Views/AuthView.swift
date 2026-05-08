@@ -12,71 +12,71 @@ struct AuthView: View {
                 Button {
                     onBack()
                 } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .semibold))
+                    Image(systemName: AppConstants.Auth.backIcon)
+                        .font(.system(size: AppDimensions.AuthView.backButtonFontSize, weight: .semibold))
                         .foregroundStyle(Color.textPrimary)
-                        .frame(width: 44, height: 44)
+                        .frame(width: AppDimensions.AuthView.backButtonSize, height: AppDimensions.AuthView.backButtonSize)
                         .background(Color.black.opacity(0.03))
                         .clipShape(Circle())
                 }
                 .buttonStyle(.plain)
-                .padding(.top, 12)
+                .padding(.top, AppDimensions.AuthView.backButtonTopPadding)
 
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: AppDimensions.AuthView.titleSectionSpacing) {
                     Text(viewModel.title)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: AppDimensions.AuthView.titleFontSize, weight: .bold))
                         .foregroundStyle(Color.textPrimary)
 
                     Text(viewModel.subtitle)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(size: AppDimensions.AuthView.subtitleFontSize, weight: .medium))
                         .foregroundStyle(Color.textSecondary)
-                        .lineSpacing(4)
+                        .lineSpacing(AppDimensions.AuthView.subtitleLineSpacing)
                 }
-                .padding(.top, 48)
+                .padding(.top, AppDimensions.AuthView.titleTopPadding)
 
-                VStack(spacing: 18) {
+                VStack(spacing: AppDimensions.AuthView.formSpacing) {
                     if viewModel.mode == .signUp {
                         AuthInputField(
-                            title: "Full Name",
+                            title: AppConstants.Auth.fullNameTitle,
                             text: $viewModel.fullName,
-                            placeholder: "Aimal Naseem",
-                            systemImage: "person"
+                            placeholder: AppConstants.Auth.fullNamePlaceholder,
+                            systemImage: AppConstants.Auth.fullNameIcon
                         )
 
                         AuthInputField(
-                            title: "Phone Number",
+                            title: AppConstants.Auth.phoneNumberTitle,
                             text: $viewModel.phoneNumber,
-                            placeholder: "+000 00 00 000",
-                            systemImage: "phone"
+                            placeholder: AppConstants.Auth.phoneNumberPlaceholder,
+                            systemImage: AppConstants.Auth.phoneNumberIcon
                         )
                     }
 
                     AuthInputField(
-                        title: "Email Address",
+                        title: AppConstants.Auth.emailTitle,
                         text: $viewModel.email,
-                        placeholder: "aimalnaseem@gmail.com",
-                        systemImage: "envelope"
+                        placeholder: AppConstants.Auth.emailPlaceholder,
+                        systemImage: AppConstants.Auth.emailIcon
                     )
 
                     AuthInputField(
-                        title: "Password",
+                        title: AppConstants.Auth.passwordTitle,
                         text: $viewModel.password,
-                        placeholder: "Enter password",
-                        systemImage: "lock",
+                        placeholder: AppConstants.Auth.passwordPlaceholder,
+                        systemImage: AppConstants.Auth.passwordIcon,
                         isSecure: !viewModel.isPasswordVisible,
-                        trailingSystemImage: viewModel.isPasswordVisible ? "eye.slash" : "eye",
+                        trailingSystemImage: viewModel.isPasswordVisible ? AppConstants.Auth.passwordVisibleIcon : AppConstants.Auth.passwordHiddenIcon,
                         trailingAction: {
                             viewModel.isPasswordVisible.toggle()
                         }
                     )
                 }
-                .padding(.top, 36)
+                .padding(.top, AppDimensions.AuthView.formTopPadding)
 
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: AppDimensions.AuthView.errorFontSize, weight: .medium))
                         .foregroundStyle(.red)
-                        .padding(.top, 18)
+                        .padding(.top, AppDimensions.AuthView.errorTopPadding)
                 }
 
                 PrimaryButton(title: viewModel.submitButtonTitle) {
@@ -88,9 +88,9 @@ struct AuthView: View {
                 }
                 .opacity(viewModel.canSubmit ? 1 : 0.6)
                 .disabled(!viewModel.canSubmit || viewModel.isLoading)
-                .padding(.top, 36)
+                .padding(.top, AppDimensions.AuthView.submitTopPadding)
 
-                HStack(spacing: 6) {
+                HStack(spacing: AppDimensions.AuthView.switchPromptSpacing) {
                     Text(viewModel.switchPrompt)
                         .foregroundStyle(Color.textSecondary)
 
@@ -99,12 +99,12 @@ struct AuthView: View {
                     }
                     .foregroundStyle(Color.accent)
                 }
-                .font(.system(size: 16, weight: .medium))
+                .font(.system(size: AppDimensions.AuthView.switchPromptFontSize, weight: .medium))
                 .frame(maxWidth: .infinity)
-                .padding(.top, 28)
+                .padding(.top, AppDimensions.AuthView.switchPromptTopPadding)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 34)
+            .padding(.horizontal, AppDimensions.AuthView.horizontalPadding)
+            .padding(.bottom, AppDimensions.AuthView.bottomPadding)
         }
         .background(Color.white)
     }

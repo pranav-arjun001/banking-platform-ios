@@ -11,10 +11,10 @@ final class AuthFormViewModel {
     private let signUpUseCase: SignUpUseCase
 
     var mode: Mode = .signIn
-    var fullName = ""
-    var phoneNumber = ""
-    var email = ""
-    var password = ""
+    var fullName = AppConstants.General.emptyString
+    var phoneNumber = AppConstants.General.emptyString
+    var email = AppConstants.General.emptyString
+    var password = AppConstants.General.emptyString
     var isPasswordVisible = false
     var isLoading = false
     var errorMessage: String?
@@ -25,42 +25,42 @@ final class AuthFormViewModel {
     }
 
     var title: String {
-        mode == .signIn ? "Sign In" : "Sign Up"
+        mode == .signIn ? AppConstants.Auth.signInTitle : AppConstants.Auth.signUpTitle
     }
 
     var subtitle: String {
         mode == .signIn
-            ? "Access your accounts securely."
-            : "Create your account to start managing your finances."
+            ? AppConstants.Auth.signInSubtitle
+            : AppConstants.Auth.signUpSubtitle
     }
 
     var submitButtonTitle: String {
-        isLoading ? "Please wait..." : title
+        isLoading ? AppConstants.Auth.loadingTitle : title
     }
 
     var switchPrompt: String {
-        mode == .signIn ? "I'm a new user." : "Already have an account."
+        mode == .signIn ? AppConstants.Auth.newUserPrompt : AppConstants.Auth.existingUserPrompt
     }
 
     var switchActionTitle: String {
-        mode == .signIn ? "Sign Up" : "Sign In"
+        mode == .signIn ? AppConstants.Auth.signUpTitle : AppConstants.Auth.signInTitle
     }
 
     var canSubmit: Bool {
         if mode == .signIn {
-            return isValidEmail(email) && password.count >= 6
+            return isValidEmail(email) && password.count >= AppConstants.Validation.minimumPasswordLength
         }
 
         return !fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && !phoneNumber.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             && isValidEmail(email)
-            && password.count >= 6
+            && password.count >= AppConstants.Validation.minimumPasswordLength
     }
 
     func switchMode() {
         mode = mode == .signIn ? .signUp : .signIn
         errorMessage = nil
-        password = ""
+        password = AppConstants.General.emptyString
         isPasswordVisible = false
     }
 
@@ -101,31 +101,31 @@ final class AuthFormViewModel {
 
     private var validationMessage: String {
         if !isValidEmail(email) {
-            return "Enter a valid email address."
+            return AppConstants.Auth.emailValidation
         }
 
-        if password.count < 6 {
-            return "Password must be at least 6 characters."
+        if password.count < AppConstants.Validation.minimumPasswordLength {
+            return AppConstants.Auth.passwordValidation
         }
 
         if mode == .signUp && fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "Enter your full name."
+            return AppConstants.Auth.fullNameValidation
         }
 
         if mode == .signUp && phoneNumber.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "Enter your phone number."
+            return AppConstants.Auth.phoneNumberValidation
         }
 
-        return "Complete all required fields."
+        return AppConstants.Auth.completeFieldsValidation
     }
 
     private func isValidEmail(_ value: String) -> Bool {
         let value = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        let parts = value.split(separator: "@")
-        guard parts.count == 2 else {
+        let parts = value.split(separator: Character(AppConstants.Validation.emailSeparator))
+        guard parts.count == AppConstants.Validation.requiredEmailPartCount else {
             return false
         }
 
-        return parts[1].contains(".")
+        return parts[1].contains(AppConstants.Validation.emailDomainSeparator)
     }
 }

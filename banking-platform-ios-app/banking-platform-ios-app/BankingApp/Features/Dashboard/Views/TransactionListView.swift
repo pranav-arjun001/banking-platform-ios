@@ -4,22 +4,22 @@ struct TransactionListView: View {
     let transactions: [DashboardTransaction]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: AppDimensions.TransactionListView.containerSpacing) {
             HStack {
-                Text("Recent Transactions")
-                    .font(.system(size: 24, weight: .bold))
+                Text(AppConstants.Dashboard.recentTransactionsTitle)
+                    .font(.system(size: AppDimensions.TransactionListView.titleFontSize, weight: .bold))
                     .foregroundStyle(Color.textPrimary)
 
                 Spacer()
 
-                Button("See All") {
+                Button(AppConstants.Dashboard.seeAllTitle) {
                 }
                 .buttonStyle(.plain)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.system(size: AppDimensions.TransactionListView.actionFontSize, weight: .semibold))
                 .foregroundStyle(Color.accent)
             }
 
-            VStack(spacing: 6) {
+            VStack(spacing: AppDimensions.TransactionListView.listSpacing) {
                 ForEach(transactions) { transaction in
                     TransactionRowView(transaction: transaction)
                 }
