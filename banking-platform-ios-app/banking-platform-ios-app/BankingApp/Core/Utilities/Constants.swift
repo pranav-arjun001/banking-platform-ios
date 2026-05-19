@@ -90,6 +90,31 @@ enum AppConstants {
         static let sampleCVV = "6986"
     }
 
+    enum Cards {
+        static let allCardsTitle = "All Cards"
+        static let addNewCardTitle = "Add New Card"
+        static let addCardButtonTitle = "Add Card"
+        static let cardholderNameTitle = "Cardholder Name"
+        static let expiryDateTitle = "Expiry Date"
+        static let cardSecurityCodeTitle = "4-digit CVV"
+        static let cardNumberTitle = "Card Number"
+        static let cardholderIcon = "person.circle"
+        static let cardNumberIcon = "creditcard"
+        static let cardChipIcon = "simcard"
+        static let cardContactlessIcon = "wave.3.right"
+        static let cardBackgroundIcon = "map"
+        static let backIcon = "chevron.left"
+        static let addIcon = "plus"
+        static let mastercardTitle = "Mastercard"
+        static let visaTitle = "VISA"
+        static let sampleCardholderName = "Aimal N"
+        static let sampleCardNumber = "4562 1122 4595 7852"
+        static let displayCardNumber = "4562   1122   4595   7852"
+        static let sampleExpiryDate = "24/2000"
+        static let addCardExpiryDate = "09/06/2024"
+        static let sampleCVV = "6986"
+    }
+
     enum Features {
         static let paymentsTitle = "Payments"
         static let transactionsTitle = "Transactions"

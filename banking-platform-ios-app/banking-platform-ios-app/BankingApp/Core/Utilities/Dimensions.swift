@@ -149,4 +149,59 @@ enum AppDimensions {
         static let amountFontSize: CGFloat = 17
         static let verticalPadding: CGFloat = 10
     }
+
+    enum CardsView {
+        static let horizontalPadding: CGFloat = 20
+        static let topPadding: CGFloat = 18
+        static let bottomPadding: CGFloat = 34
+        static let headerHeight: CGFloat = 44
+        static let titleFontSize: CGFloat = 18
+        static let cardSpacing: CGFloat = 16
+        static let addButtonBottomPadding: CGFloat = 24
+        static let addButtonIconFontSize: CGFloat = 20
+        static let addButtonSpacing: CGFloat = 10
+    }
+
+    enum AddCardView {
+        static let horizontalPadding: CGFloat = 20
+        static let topPadding: CGFloat = 18
+        static let headerHeight: CGFloat = 44
+        static let backButtonSize: CGFloat = 44
+        static let backButtonFontSize: CGFloat = 18
+        static let titleFontSize: CGFloat = 18
+        static let contentSpacing: CGFloat = 28
+        static let fieldSpacing: CGFloat = 20
+        static let rowSpacing: CGFloat = 96
+    }
+
+    enum PaymentCardView {
+        static let cornerRadius: CGFloat = 22
+        static let height: CGFloat = 198
+        static let contentPadding: CGFloat = 20
+        static let topIconSize: CGFloat = 24
+        static let numberFontSize: CGFloat = 25
+        static let cardholderFontSize: CGFloat = 15
+        static let metaTitleFontSize: CGFloat = 10
+        static let metaValueFontSize: CGFloat = 14
+        static let brandFontSize: CGFloat = 14
+        static let visaFontSize: CGFloat = 20
+        static let contentSpacing: CGFloat = 18
+        static let metaSpacing: CGFloat = 30
+        static let brandCircleSize: CGFloat = 19
+        static let brandCircleOffset: CGFloat = 6
+        static let brandMarkWidth: CGFloat = 38
+        static let brandMarkHeight: CGFloat = 19
+        static let backgroundIconSize: CGFloat = 120
+    }
+
+    enum CardFormField {
+        static let titleFontSize: CGFloat = 15
+        static let valueFontSize: CGFloat = 15
+        static let iconFontSize: CGFloat = 18
+        static let iconWidth: CGFloat = 22
+        static let contentSpacing: CGFloat = 14
+        static let titleBottomPadding: CGFloat = 10
+        static let dividerTopPadding: CGFloat = 12
+        static let dividerHeight: CGFloat = 1
+    }
 }

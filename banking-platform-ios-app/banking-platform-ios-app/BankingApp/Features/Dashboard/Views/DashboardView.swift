@@ -47,7 +47,9 @@ struct DashboardView: View {
     let onSignOut: () -> Void
 
     @State private var viewModel: DashboardViewModel
+    @State private var cardsViewModel = CardsViewModel()
     @State private var selectedTab: DashboardTab = .home
+    @State private var isAddingCard = false
 
     init(userName: String, onSignOut: @escaping () -> Void) {
         self.userName = userName
@@ -65,7 +67,7 @@ struct DashboardView: View {
                 case .home:
                     homeContent
                 case .cards:
-                    placeholderView(title: AppConstants.Dashboard.cardsTabTitle, subtitle: AppConstants.Dashboard.cardsPlaceholderSubtitle)
+                    CardsView(viewModel: cardsViewModel, isAddingCard: $isAddingCard)
                 case .statistics:
                     placeholderView(title: AppConstants.Dashboard.statisticsTabTitle, subtitle: AppConstants.Dashboard.statisticsPlaceholderSubtitle)
                 case .settings:
@@ -73,9 +75,15 @@ struct DashboardView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                dashboardTabBar
+                if showsDashboardTabBar {
+                    dashboardTabBar
+                }
             }
         }
+    }
+
+    private var showsDashboardTabBar: Bool {
+        !(selectedTab == .cards && isAddingCard)
     }
 
     private var homeContent: some View {
